@@ -10,6 +10,8 @@ import time
 # Specify the QR Code Details
 qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=3)
 
+# Create Folder in Current Location
+
 
 # Function To Load QR Image
 def load_qr_image(img):
@@ -62,15 +64,23 @@ def main():
 
         if img_file is not None:
             # Display QR Image by Streamlit
-            qr_img = load_qr_image(img_file)
-            st.image(qr_img)
+            # qr_img = load_qr_image(img_file)
+            # st.image(qr_img)
 
             # Display QR Image by Opencv
             file_bytes = np.asarray(bytearray(img_file.read()), dtype=np.uint8)
-            img_opencv = cv2.imdecode(file_bytes)
+            img_opencv = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
-            st.image(img_opencv)
+            c1, c2 = st.columns(2)
+            with c1:
+                st.image(img_opencv)
+            with c2:
+                st.info("QR Decoded")
+                det = cv2.QRCodeDetector()
+                retval, points, straight_qrcode = det.detectAndDecode(img_opencv)
 
+                # Write Decoded QR Code
+                st.write(retval)
     else:
         st.subheader("About")
 
