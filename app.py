@@ -1,10 +1,10 @@
 # Import Library
-import os.path
-
 import streamlit as st
 from PIL import Image
 import qrcode
 import os
+import numpy as np
+import cv2
 import time
 
 # Specify the QR Code Details
@@ -61,9 +61,15 @@ def main():
         img_file = st.file_uploader("Upload QR Image", type=["jpg", "png", "jpeg"])
 
         if img_file is not None:
-            # Display QR Image
+            # Display QR Image by Streamlit
             qr_img = load_qr_image(img_file)
             st.image(qr_img)
+
+            # Display QR Image by Opencv
+            file_bytes = np.asarray(bytearray(img_file.read()), dtype=np.uint8)
+            img_opencv = cv2.imdecode(file_bytes)
+
+            st.image(img_opencv)
 
     else:
         st.subheader("About")
