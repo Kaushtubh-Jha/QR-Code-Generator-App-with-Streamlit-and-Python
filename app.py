@@ -75,12 +75,16 @@ def main():
             with c1:
                 st.image(img_opencv)
             with c2:
-                st.info("QR Decoded")
+                st.info("Decoded QR Code")
                 det = cv2.QRCodeDetector()
                 retval, points, straight_qrcode = det.detectAndDecode(img_opencv)
 
                 # Write Decoded QR Code
                 st.write(retval)
+
+                # Display QR Code Raw Data
+                st.info("QR Code Raw Data")
+                st.write(straight_qrcode)
     else:
         st.subheader("About")
 
