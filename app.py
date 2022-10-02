@@ -92,8 +92,7 @@ def main():
                 st.info("QR Code Raw Data")
                 st.write(straight_qrcode)
     else:
-        st.subheader("Text Functionalities")
-        st.form_submit_button("To Be Added")
+        st.subheader("Text Functionalities --- In Progress...")
         # spk = pyttsx3.init()
         #
         # # Control Audio Rate
