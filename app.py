@@ -26,7 +26,7 @@ def load_qr_image(img):
 
 # Function main
 def main():
-    menu = ["Text To QR", "DecoderQR", "Text To Audio"]
+    menu = ["Text To QR", "DecoderQR", "Text Functionalities"]
 
     choice = st.sidebar.selectbox("Menu", menu)
 
@@ -92,19 +92,20 @@ def main():
                 st.info("QR Code Raw Data")
                 st.write(straight_qrcode)
     else:
-        st.subheader("Text To Audio")
-        spk = pyttsx3.init()
-
-        # Control Audio Rate
-        spk.setProperty("rate", 160)
-
-        # Text input to convert into QR
-        with st.form(key="txt_form"):
-            raw_text = st.text_area("Enter Text")
-            submit_button = st.form_submit_button("Convert")
-            if submit_button:
-                spk.say(raw_text)
-                spk.runAndWait()
+        st.subheader("Text Functionalities")
+        st.form_submit_button("To Be Added")
+        # spk = pyttsx3.init()
+        #
+        # # Control Audio Rate
+        # spk.setProperty("rate", 160)
+        #
+        # # Text input to convert into QR
+        # with st.form(key="txt_form"):
+        #     raw_text = st.text_area("Enter Text")
+        #     submit_button = st.form_submit_button("Convert")
+        #     if submit_button:
+        #         spk.say(raw_text)
+        #         spk.runAndWait()
 
 
 if __name__ == "__main__":
