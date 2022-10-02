@@ -11,6 +11,10 @@ import time
 qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=3)
 
 # Create Folder in Current Location
+path = "./image_folder"
+isdir = os.path.isdir(path)
+if not isdir:
+    os.mkdir('image_folder')
 
 
 # Function To Load QR Image
