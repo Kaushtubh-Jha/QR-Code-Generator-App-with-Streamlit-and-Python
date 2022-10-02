@@ -6,6 +6,7 @@ import os
 import numpy as np
 import cv2
 import time
+import pyttsx3
 
 # Specify the QR Code Details
 qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=3)
@@ -25,12 +26,13 @@ def load_qr_image(img):
 
 # Function main
 def main():
-    menu = ["Home", "DecoderQR", "About"]
+    menu = ["Text To QR", "DecoderQR", "Text To Audio"]
 
     choice = st.sidebar.selectbox("Menu", menu)
 
-    if choice == "Home":
-        st.subheader("Home")
+    if choice == "Text To QR":
+        st.subheader("Text To QR")
+
         # Text input to convert into QR
         with st.form(key="myqr_form"):
             raw_text = st.text_area("Enter Text")
@@ -90,7 +92,19 @@ def main():
                 st.info("QR Code Raw Data")
                 st.write(straight_qrcode)
     else:
-        st.subheader("About")
+        st.subheader("Text To Audio")
+        spk = pyttsx3.init()
+
+        # Control Audio Rate
+        spk.setProperty("rate", 160)
+
+        # Text input to convert into QR
+        with st.form(key="txt_form"):
+            raw_text = st.text_area("Enter Text")
+            submit_button = st.form_submit_button("Convert")
+            if submit_button:
+                spk.say(raw_text)
+                spk.runAndWait()
 
 
 if __name__ == "__main__":
